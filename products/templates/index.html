@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <main role="main">
+
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Product Hunt: Discover your next favorite thing</h1>
+          <p class="lead text-muted">Product Hunt surfaces the best new products, every day. It's a place for product-loving enthusiasts to share and geek out about the latest mobile apps, websites, hardware projects, and tech creations.</p>
+        </div>
+      </section>
+
+      <div class="container">
+            <img class="card-img-top img-thumbnail" style="margin:10px 30px;" src ="{{data.image.url}}" alt="Card image cap">
+        <h5 class="card-header">{{data.summary}}</h5>
+        <div class="card-body">
+          <br>
+          <p class="card-text">{{data.body}}</p>
+        </div>
+      </div>
+    </div>
+    </main>
+
+    {% endblock %}
