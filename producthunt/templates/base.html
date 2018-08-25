@@ -30,6 +30,9 @@
                 
                 {% if user.is_authenticated %}
                 <!-- Executed when user is logged in. On click The Js code submits the form -->
+                <a class="nav-item nav-link" href="{% url 'create' %}">
+                    <span class="oi oi-plus" style="color:orangered">Create</span>
+                </a>
                 <li class="nav-item dropdown"> 
                 <a class="nav-link nav-item dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
                     {{user.username}}
