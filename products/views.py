@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import product
 from django.utils import timezone
@@ -35,10 +35,15 @@ def create(request):
             item.hunter = request.user
 
             item.save()
-            return redirect('main')
+            return redirect('/product/'+ str(item.id))
 
         else:
             return render(request, 'create.html', {'error': 'One or more Fields of the form are empty'})
 
     else:
         return render(request, 'create.html')
+
+def details(request, product_id):
+    item = get_object_or_404(product, pk=product_id)
+    print(item.title)
+    return render(request, 'details.html', {'item' : item})
