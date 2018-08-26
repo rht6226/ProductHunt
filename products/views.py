@@ -6,7 +6,8 @@ from django.utils import timezone
 
 # Create your views here.
 def main(request):
-    return render(request, "index.html")
+    items = product.objects.all()
+    return render(request, "index.html", {'items': items})
 
 @login_required
 def create(request):
