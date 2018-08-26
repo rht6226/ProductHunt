@@ -48,3 +48,11 @@ def details(request, product_id):
     item = get_object_or_404(product, pk=product_id)
     print(item.title)
     return render(request, 'details.html', {'item' : item})
+
+@login_required(login_url = '/accounts/login')
+def upvote(request, product_id):
+    if request.method == 'POST':
+        item = get_object_or_404(product, pk=product_id)
+        item.votes_total += 1
+        item.save()
+        return redirect('/product/' + str(item.id))

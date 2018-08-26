@@ -7,16 +7,13 @@
       <section class="jumbotron text-center">
         <div class="container">
           <h1 class="jumbotron-heading">Product Hunt: Discover your next favorite thing</h1>
-          <p class="lead text-muted">Product Hunt surfaces the best new products, every day. It's a place for product-loving enthusiasts to share and geek out about the latest mobile apps, websites, hardware projects, and tech creations.</p>
+          <p class="lead text-muted">This is a clone for ProductHunt. It was created as a project while trying to learn the concept of django for Non-Commercial and academic uses only. </p>
         </div>
       </section>
 
       {% for item in items %}
-      <div class="container card" style="height:auto; padding:15px;">
+      <div class="container card pd-2" style="height:auto;">
           <div class="row justify-content-md-center">
-              <div class="col-2 text-center">
-                  <img src="{{item.icon.url}}" class="img-fluid">
-              </div>
               <div class="col-10 text-center">
                   <h1>
                       <a href="{% url 'details' item.id %}">{{item.title}}</a>
@@ -25,13 +22,18 @@
           </div>
           <br><br>
           <div class="row">
-              <div class="col-9 text-center text-muted">
+              <div class="col-2 text-center">
+                  <img src="{{item.icon.url}}" class="img-fluid">
+              </div>
+              <div class="col-7 text-center text-muted">
                 <p>
                   {{item.body |slice:"0:200"}}
                 </p>
               </div>
               <div class="col-3 text-center" style="color: snow; ">
-                  <a class="btn btn-info btn-danger btn-lg" role="button"> Upvote  {{item.votes_total}}</a>
+                  <a class="btn btn-info btn-danger btn-lg"  href="javascript:{document.getElementById('upvote').submit()}"> 
+                      <span class="oi oi-chevron-top"></span> Upvote <span style="font-size:15px;">{{item.votes_total}}</span>
+                  </a>
               </div>
           </div>
           <br>
@@ -39,13 +41,17 @@
             </div>
           <div class="row">
               <div class="col-5 text-center text-muted">
-                  <p>Hunted by - {{item.hunter}}</p>
+                  <p><span class="oi oi-magnifying-glass"></span> Hunted by - {{item.hunter}}</p>
               </div>
               <div class="col-4 text-center text-muted">
-                      <p>{{item.pub_date}} </p>
+                      <p><span class="oi oi-clock"></span> {{item.pub_date}} </p>
               </div>
           </div><br>
       </div><br><br>
+      <form method="POST" action="{% url 'upvote' item.id%}" id="upvote">
+        {% csrf_token %}
+          <input type="hidden">
+        </form>
       {% endfor %}
     </main>
 

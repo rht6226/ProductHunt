@@ -20,23 +20,29 @@
                 <img src="{{item.image.url}}" class="img-fluid img-thumbnail">
             </div>
             <div class="col-3 text-center" style="color: snow; ">
-                <a class="btn btn-info btn-danger btn-lg" role="button"> Upvote  {{item.votes_total}}</a>
+                <a class="btn btn-info btn-danger btn-lg"  href="javascript:{document.getElementById('upvote').submit()}"> 
+                <span class="oi oi-chevron-top"></span> Upvote <span style="font-size:15px;">{{item.votes_total}}</span>
+                </a>
             </div>
         </div>
         <br>
-        <div class="row">
+        <div class="row text-muted">
             <div class="col-5 text-center">
-                <h5>Hunted by - {{item.hunter}}</h5>
+                <h5><span class="oi oi-magnifying-glass"></span> Hunted by - {{item.hunter}}</h5>
             </div>
             <div class="col-4 text-center">
-                    <h5>{{item.pub_date}}</h4>
+                    <h5><span class="oi oi-clock"></span> {{item.pub_date}}</h4>
             </div>
         </div><br>
         <div class="row">
-                <div class="col-9 text-center" style="padding:20px;">
-                    <p class="text-muted">{{item.body}}</p>
-                </div>
+            <div class="col-9 text-center" style="padding:20px;">
+            <p class="text-muted">{{item.body}}</p>
+        </div>
         </div>
     </div>
     <br><hr>
+    <form method="POST" action="{% url 'upvote' item.id%}" id="upvote">
+        {% csrf_token %}
+        <input type="hidden">
+    </form>
 {% endblock %}
